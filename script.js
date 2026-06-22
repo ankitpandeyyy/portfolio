@@ -23,7 +23,7 @@ window.addEventListener('mousemove', (e) => {
 });
 
 // Interactive hover effects for clickable elements
-const interactables = document.querySelectorAll('a, button, .project-card, .skill-tags span');
+const interactables = document.querySelectorAll('a, button, .project-card, .skill-tags span, .profile-card');
 
 interactables.forEach(el => {
     el.addEventListener('mouseenter', () => {
@@ -76,3 +76,36 @@ window.addEventListener('scroll', () => {
         navbar.style.boxShadow = 'none';
     }
 });
+
+// 3D Parallax Tilt Effect for Profile Card
+const profileCard = document.querySelector('.profile-card');
+
+if (profileCard) {
+    profileCard.addEventListener('mousemove', (e) => {
+        const rect = profileCard.getBoundingClientRect();
+        
+        // Mouse position relative to the card
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        // Calculate normalized position (-0.5 to 0.5)
+        const normalizedX = (x / rect.width) - 0.5;
+        const normalizedY = (y / rect.height) - 0.5;
+        
+        // Maximum rotation angles (in degrees) - reduced for a soft, natural response
+        const maxRotationX = 7;
+        const maxRotationY = 7;
+        
+        // Calculate rotation angles
+        const rotateX = -normalizedY * maxRotationX;
+        const rotateY = normalizedX * maxRotationY;
+        
+        // Apply subtle 3D rotation and scale
+        profileCard.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.01)`;
+    });
+    
+    profileCard.addEventListener('mouseleave', () => {
+        // Reset transformation smoothly
+        profileCard.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
+    });
+}
