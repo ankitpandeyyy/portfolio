@@ -23,7 +23,7 @@ window.addEventListener('mousemove', (e) => {
 });
 
 // Interactive hover effects for clickable elements
-const interactables = document.querySelectorAll('a, button, .project-card, .skill-tags span, .profile-card');
+const interactables = document.querySelectorAll('a, button, .project-card, .skill-tags span, .profile-card, .resume-doc-card');
 
 interactables.forEach(el => {
     el.addEventListener('mouseenter', () => {
